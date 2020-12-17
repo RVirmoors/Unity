@@ -20,6 +20,6 @@ public class GameController : MonoBehaviour
 
     public void DisplayRoomText()
     {
-        narration.text = roomNavigation.currentRoom.narration;
+        //narration.text = roomNavigation.currentRoom.narration;
     }
 }

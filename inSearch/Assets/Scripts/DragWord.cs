@@ -2,21 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using TMPro;
 using UnityEngine.UI;
 
 public class DragWord : MonoBehaviour, IDragHandler, IEndDragHandler, IDropHandler
 {
     private bool isDragging;
     private RectTransform rectTransform;
-   // private BoxCollider2D boxCollider;
+    // private BoxCollider2D boxCollider;
+    private static string draggedWord;
 
+    int layer;
 
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
+        draggedWord = GetComponent<TextMeshProUGUI>().text;
   //      boxCollider = gameObject.AddComponent<BoxCollider2D>();
   //      boxCollider.isTrigger = true;
- //       boxCollider.size = new Vector2(rectTransform.rect.width, rectTransform.rect.height);
+  //       boxCollider.size = new Vector2(rectTransform.rect.width, rectTransform.rect.height);
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -25,7 +29,7 @@ public class DragWord : MonoBehaviour, IDragHandler, IEndDragHandler, IDropHandl
         if (canvas == null)
             return;
 
-        Debug.Log("DRAG");
+        //Debug.Log("DRAG: " + draggedWord);
         //transform.position = Input.mousePosition;
         rectTransform.anchoredPosition += eventData.delta;
     }
@@ -37,6 +41,7 @@ public class DragWord : MonoBehaviour, IDragHandler, IEndDragHandler, IDropHandl
         if(RectTransformUtility.RectangleContainsScreenPoint(narrPanel, Input.mousePosition))
         {
             Debug.Log("INTERACT");
+            Narration.InteractWithDraggedWord(draggedWord);
         }
     }
 

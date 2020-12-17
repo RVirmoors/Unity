@@ -6,6 +6,6 @@ using UnityEngine;
 public class Room : ScriptableObject
 {
     public string roomName;
-    [TextArea] public string narration;
+    [TextArea] public string story;
     [HideInInspector] public Word[] words;
 }
