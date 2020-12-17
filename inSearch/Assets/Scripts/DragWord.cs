@@ -34,7 +34,7 @@ public class DragWord : MonoBehaviour, IDragHandler, IEndDragHandler, IDropHandl
     {
         RectTransform narrPanel = GameObject.Find("NarrationBg").transform as RectTransform;
 
-        if(!RectTransformUtility.RectangleContainsScreenPoint(narrPanel, Input.mousePosition))
+        if(RectTransformUtility.RectangleContainsScreenPoint(narrPanel, Input.mousePosition))
         {
             Debug.Log("INTERACT");
         }
@@ -42,7 +42,7 @@ public class DragWord : MonoBehaviour, IDragHandler, IEndDragHandler, IDropHandl
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        transform.localPosition = Vector3.zero;
+        //transform.localPosition = Vector3.zero;
     }
 
 }
