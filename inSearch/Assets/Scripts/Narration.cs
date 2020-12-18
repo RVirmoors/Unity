@@ -14,7 +14,6 @@ public class Narration : MonoBehaviour//, IPointerEnterHandler, IPointerExitHand
     private Canvas canvas;
     private Camera cam;
 
-    private bool isHoveringObject;
     private static int selectedWord = -1;
 
     private TMP_MeshInfo[] m_cachedMeshInfoVertexData;
