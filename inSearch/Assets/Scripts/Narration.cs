@@ -64,6 +64,23 @@ public class Narration : MonoBehaviour//, IPointerEnterHandler, IPointerExitHand
     {
         if (true)
         {
+            #region _ 〿 Selection Handling
+            int charIndex = TMP_TextUtilities.FindIntersectingCharacter(textMeshPro, Input.mousePosition, cam, true);
+            bool spaceIsSelected;
+            if (charIndex != -1)
+            {
+                char selectedChar = textMeshPro.text[charIndex];
+                spaceIsSelected = (selectedChar == '〿');
+                HighlightChar(charIndex);
+                // Update Geometry
+                textMeshPro.UpdateVertexData(TMP_VertexDataUpdateFlags.All);
+            }
+            else
+            {
+                spaceIsSelected = false;
+                //HighlightChar(charIndex, false);
+            }
+            #endregion
 
             #region Word Selection Handling
             //Check if Mouse intersects any words and if so assign a random color to that word.
@@ -78,22 +95,7 @@ public class Narration : MonoBehaviour//, IPointerEnterHandler, IPointerExitHand
                 for (int i = 0; i < wInfo.characterCount; i++)
                 {
                     int characterIndex = wInfo.firstCharacterIndex + i;
-
-                    // Get the index of the material / sub text object used by this character.
-                    int meshIndex = textMeshPro.textInfo.characterInfo[characterIndex].materialReferenceIndex;
-
-                    // Get the index of the first vertex of this character.
-                    int vertexIndex = textMeshPro.textInfo.characterInfo[characterIndex].vertexIndex;
-
-                    // Get a reference to the vertex color
-                    Color32[] vertexColors = textMeshPro.textInfo.meshInfo[meshIndex].colors32;
-
-                    Color32 c = vertexColors[vertexIndex + 0].Tint(1.33333f);
-
-                    vertexColors[vertexIndex + 0] = c;
-                    vertexColors[vertexIndex + 1] = c;
-                    vertexColors[vertexIndex + 2] = c;
-                    vertexColors[vertexIndex + 3] = c;
+                    HighlightChar(characterIndex, false);
                 }
 
                 // Update Geometry
@@ -114,21 +116,7 @@ public class Narration : MonoBehaviour//, IPointerEnterHandler, IPointerExitHand
                 for (int i = 0; i < wInfo.characterCount; i++)
                 {
                     int characterIndex = wInfo.firstCharacterIndex + i;
-
-                    // Get the index of the material / sub text object used by this character.
-                    int meshIndex = textMeshPro.textInfo.characterInfo[characterIndex].materialReferenceIndex;
-
-                    int vertexIndex = textMeshPro.textInfo.characterInfo[characterIndex].vertexIndex;
-
-                    // Get a reference to the vertex color
-                    Color32[] vertexColors = textMeshPro.textInfo.meshInfo[meshIndex].colors32;
-
-                    Color32 c = vertexColors[vertexIndex + 0].Tint(0.75f);
-
-                    vertexColors[vertexIndex + 0] = c;
-                    vertexColors[vertexIndex + 1] = c;
-                    vertexColors[vertexIndex + 2] = c;
-                    vertexColors[vertexIndex + 3] = c;
+                    HighlightChar(characterIndex);
                 }
 
                 // Update Geometry
@@ -137,6 +125,28 @@ public class Narration : MonoBehaviour//, IPointerEnterHandler, IPointerExitHand
             }
             #endregion
         }
+    }
+
+    private void HighlightChar(int characterIndex, bool toggle = true)
+    {
+        // Get the index of the material / sub text object used by this character.
+        int meshIndex = textMeshPro.textInfo.characterInfo[characterIndex].materialReferenceIndex;
+
+        int vertexIndex = textMeshPro.textInfo.characterInfo[characterIndex].vertexIndex;
+
+        // Get a reference to the vertex color
+        Color32[] vertexColors = textMeshPro.textInfo.meshInfo[meshIndex].colors32;
+        Color32 c;
+
+        if (toggle) // highlight ON
+            c = vertexColors[vertexIndex + 0].Tint(0.75f);
+        else        // highlight OFF
+            c = vertexColors[vertexIndex + 0].Tint(1.33333f);
+
+        vertexColors[vertexIndex + 0] = c;
+        vertexColors[vertexIndex + 1] = c;
+        vertexColors[vertexIndex + 2] = c;
+        vertexColors[vertexIndex + 3] = c;
     }
 
     public static void InteractWithDraggedWord(string draggedWord)
