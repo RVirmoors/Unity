@@ -29,7 +29,7 @@ public class DragWord : MonoBehaviour, IDragHandler, IEndDragHandler, IDropHandl
         if (canvas == null)
             return;
 
-        //Debug.Log("DRAG: " + draggedWord);
+        Debug.Log("DRAG: " + draggedWord);
         //transform.position = Input.mousePosition;
         rectTransform.anchoredPosition += eventData.delta;
     }
