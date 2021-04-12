@@ -38,18 +38,19 @@ print(device)
 # Create context
 
 context = """
-Math Class
-Chris was bad at _. _ _ _ He ended up passing the test.
+Chris is lying in bed.
+Outside the sun is shining.
+Chris said: _ _
 """.strip()
 
 context_ids = ilm.tokenize_util.encode(context, tokenizer)
 
 # Replace blanks with appropriate tokens from left to right
 _blank_id = ilm.tokenize_util.encode(' _', tokenizer)[0]
-context_ids[context_ids.index(_blank_id)] = additional_tokens_to_ids['<|infill_word|>']
+#context_ids[context_ids.index(_blank_id)] = additional_tokens_to_ids['<|infill_word|>']
 context_ids[context_ids.index(_blank_id)] = additional_tokens_to_ids['<|infill_sentence|>']
 context_ids[context_ids.index(_blank_id)] = additional_tokens_to_ids['<|infill_sentence|>']
-context_ids[context_ids.index(_blank_id)] = additional_tokens_to_ids['<|infill_sentence|>']
+#context_ids[context_ids.index(_blank_id)] = additional_tokens_to_ids['<|infill_sentence|>']
 print(ilm.tokenize_util.decode(context_ids, tokenizer))
 
 # Fill in

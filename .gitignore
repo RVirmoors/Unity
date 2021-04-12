@@ -1,6 +1,7 @@
 ilm/ilm
 ilm/tmp
-ilm/venv
+ilm/.venv
+ilm/.vscode
 ml-agents-master
 */Assets/TextMesh Pro/Examples & Extras
 
