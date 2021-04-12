@@ -655,7 +655,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "I would like to eat an \u303Fx."
+  m_text: I would like to eat an X.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -762,7 +762,7 @@ MonoBehaviour:
   ShowLines: 0
   ShowMeshBounds: 0
   ShowTextBounds: 0
-  ObjectStats: 'Characters: 26   Words: 7   Spaces: 6   Sprites: 0   Links: 0
+  ObjectStats: 'Characters: 25   Words: 7   Spaces: 6   Sprites: 0   Links: 0
 
     Lines:
     1   Pages: 1'

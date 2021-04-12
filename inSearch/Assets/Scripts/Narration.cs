@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using OscCore;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -18,6 +19,13 @@ public class Narration : MonoBehaviour//, IPointerEnterHandler, IPointerExitHand
 
     private TMP_MeshInfo[] m_cachedMeshInfoVertexData;
 
+    [Tooltip("The IP address to send to")]
+    [SerializeField] string m_IpAddress = "127.0.0.1";
+
+    [Tooltip("The port on the remote IP to send to")]
+    [SerializeField] int m_Port = 7000;
+    private static OscClient Client;
+
     void Awake()
     {
         if (_instance == null)
@@ -33,6 +41,9 @@ public class Narration : MonoBehaviour//, IPointerEnterHandler, IPointerExitHand
                 cam = null;
             else
                 cam = canvas.worldCamera;
+
+            if (Client == null)
+                Client = new OscClient(m_IpAddress, m_Port);
         }
         else
         {// singleton already exists, don't create
@@ -64,6 +75,7 @@ public class Narration : MonoBehaviour//, IPointerEnterHandler, IPointerExitHand
     {
         if (true)
         {
+            /*
             #region _ 〿 Selection Handling
             int charIndex = TMP_TextUtilities.FindIntersectingCharacter(textMeshPro, Input.mousePosition, cam, true);
             bool spaceIsSelected;
@@ -81,9 +93,10 @@ public class Narration : MonoBehaviour//, IPointerEnterHandler, IPointerExitHand
                 //HighlightChar(charIndex, false);
             }
             #endregion
+            */
 
             #region Word Selection Handling
-            //Check if Mouse intersects any words and if so assign a random color to that word.
+            //Check if Mouse intersects any words and if so highlight that word.
             int wordIndex = TMP_TextUtilities.FindIntersectingWord(textMeshPro, Input.mousePosition, cam);
 
             // Clear previous word selection.
@@ -156,6 +169,12 @@ public class Narration : MonoBehaviour//, IPointerEnterHandler, IPointerExitHand
             TMP_WordInfo wInfo = textMeshPro.textInfo.wordInfo[selectedWord];
             string selWord = wInfo.GetWord();
             Debug.Log("INTERACT: " + draggedWord + " " + selWord);
+            if (selWord == "X") {
+                Debug.Log("OH");
+            }
+            Client.Send("/narration", textMeshPro.text);
+            Client.Send("/query/draggedWord", draggedWord);
+            Client.Send("/query/selectedWordIndex", selectedWord);
         }
 
     }
