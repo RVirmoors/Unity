@@ -5,6 +5,7 @@ ilm/.venv
 ilm/.vscode
 ml-agents-master
 */Assets/TextMesh Pro/Examples & Extras
+*/Assets/OscCore
 
 # This .gitignore file should be placed at the root of your Unity project directory
 #
