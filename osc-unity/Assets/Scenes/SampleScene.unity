@@ -152,7 +152,7 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 0.6715984, b: 0.5896226, a: 1}
-  m_Intensity: 231.46053
+  m_Intensity: 10.7
   m_Range: 10
   m_SpotAngle: 52
   m_InnerSpotAngle: 1
@@ -242,7 +242,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 1
+        m_CallState: 2
 --- !u!114 &705507997
 MonoBehaviour:
   m_ObjectHideFlags: 0
