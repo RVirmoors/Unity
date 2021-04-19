@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/OscCore/Runtime/Scenes/Debug/Runtime Receiver Debug.unity
+    guid: 507b1970f87e44b4997feb513e9d8ab4
   m_configObjects: {}
